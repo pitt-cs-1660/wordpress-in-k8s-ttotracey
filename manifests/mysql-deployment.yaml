@@ -106,9 +106,9 @@ spec:
         # add volumeMounts inside the container spec above
         # mount path: /var/lib/mysql
         ##
-      volumeMounts:
-      - name: mount-sql
-        mount path: /var/lib/mysql
+        volumeMounts:
+        - name: mount-sql
+          mount path: /var/lib/mysql
 
       ##
       # add volumes at the pod spec level (same indentation as containers)
