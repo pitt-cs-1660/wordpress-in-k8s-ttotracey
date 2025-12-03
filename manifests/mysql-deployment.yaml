@@ -107,7 +107,7 @@ spec:
         # mount path: /var/lib/mysql
         ##
         volumeMounts:
-        - name: mount-sql
+        - name: sql-pvc-reference
           mountPath: /var/lib/mysql
 
       ##

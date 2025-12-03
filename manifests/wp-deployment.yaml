@@ -96,7 +96,7 @@ spec:
         # mount path: /var/www/html
         ##
         volumeMounts:
-        - name: mount-wp
+        - name: wp-pvc-reference
           mountPath: /var/www/html
 
       ##
