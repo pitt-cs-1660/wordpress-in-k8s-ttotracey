@@ -49,8 +49,9 @@ spec:
   # tier: mysql
   ##
   selector:
-    app: wordpress
-    tier: mysql
+    matchLabels: 
+      app: wordpress
+      tier: mysql
   template:
     ##
     # create pod metadata labels here (match the selectorLabels)

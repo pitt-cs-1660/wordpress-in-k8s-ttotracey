@@ -46,8 +46,9 @@ spec:
   # tier: frontend
   ##
   selector:
-    app: wordpress
-    tier: frontend
+    matchLabels:
+      app: wordpress
+      tier: frontend
 
   template:
     ##
