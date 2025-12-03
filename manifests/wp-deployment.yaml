@@ -95,7 +95,10 @@ spec:
       # add volumes at the pod spec level (same indentation as containers)
       # reference the PVC: wp-pv-claim
       ##
-      reference the PVC: wp-pv-claim
+      volumes:
+      - name: wp-pvc-reference
+        persistentVolumeClaim:
+          claimName: wp-pv-claim
 
 ---
 ##
@@ -109,10 +112,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: wp-pv-claim
 spec:
-  capacity:
-    storage: 1Gi
   accessModes:
-  - ReadWriteOnce # Single pod read/write
+    - ReadWriteOnce 
+  resource:
+    requests:
+      storage: 1Gi
   storageClassName: standard
   volumeMounts:
   - name: pvc-claim

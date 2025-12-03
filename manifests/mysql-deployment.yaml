@@ -100,14 +100,18 @@ spec:
         # mount path: /var/lib/mysql
         ##
         volumeMounts:
-        - name: mount-sql
-        mount path: /var/lib/mysql
+        - mount path: /var/lib/mysql
+          name: mount-sql
 
       ##
       # add volumes at the pod spec level (same indentation as containers)
       # reference the PVC: mysql-pv-claim
       ##
-      reference the PVC: mysql-pv-claim
+      volumes:
+      - name: sql-pvc-reference
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+      
 ---
 ##
 # create persistent volume claim here
@@ -123,10 +127,11 @@ metadata:
 spec:
   accessModes: 
     - ReadWriteOnce
-  capacity:
-    storage: 1Gi
+  resources:
+    requests:
+      storage: 1Gi
   storageClassName: standard
   volumeMounts:
   - name: vol
-  mount path: /var/lib/mysql
+    mount path: /var/lib/mysql
 
