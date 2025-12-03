@@ -108,7 +108,7 @@ spec:
         ##
         volumeMounts:
         - name: mount-sql
-          mount path: /var/lib/mysql
+          mountPath: /var/lib/mysql
 
       ##
       # add volumes at the pod spec level (same indentation as containers)
@@ -140,5 +140,5 @@ spec:
   storageClassName: standard
   volumeMounts:
   - name: pvc-claim
-    mount path: /var/lib/mysql
+    mountPath: /var/lib/mysql
 
