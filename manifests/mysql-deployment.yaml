@@ -18,6 +18,7 @@ spec:
   #   app: wordpress
   #   tier: mysql
   ##
+  labels:
       app: wordpress
       tier: mysql
 ---
@@ -98,6 +99,8 @@ spec:
         # add volumeMounts inside the container spec above
         # mount path: /var/lib/mysql
         ##
+        volumeMounts:
+        - name: mount-sql
         mount path: /var/lib/mysql
 
       ##
@@ -124,5 +127,7 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: standard
+  volumeMounts:
+  - name: vol
   mount path: /var/lib/mysql
 
