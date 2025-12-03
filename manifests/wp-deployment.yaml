@@ -126,6 +126,3 @@ spec:
     requests:
       storage: 1Gi
   storageClassName: standard
-  volumeMounts:
-  - name: pvc-claim
-    mountPath: /var/www/html
