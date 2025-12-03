@@ -18,6 +18,8 @@ spec:
   #   app: wordpress
   #   tier: mysql
   ##
+      app: wordpress
+      tier: mysql
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -29,6 +31,8 @@ data:
   # database: wordpress
   # user: wordpress
   ##
+    database: 'wordpress'
+    user: 'wordpress'
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,6 +47,8 @@ spec:
   # app: wordpress
   # tier: mysql
   ##
+  app: wordpress
+  tier: mysql
   template:
     ##
     # create pod metadata labels here (match the selectorLabels)
@@ -57,12 +63,34 @@ spec:
         # MYSQL_DATABASE (from wordpress-mysql configmap, key: database)
         # MYSQL_USER (from wordpress-mysql configmap, key: user)
         ##
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: wordpress-mysql
+              key: database
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: wordpress-mysql
+              key: user
+
 
         ##
         # mount sensitive environment vars from secret using secretKeyRef
         # MYSQL_ROOT_PASSWORD (from database secret, key: root-password)
         # MYSQL_PASSWORD (from database secret, key: user-password)
         ##
+
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: root-password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database
+              key: user-password
         ports:
         - containerPort: 3306
           name: mysql
@@ -70,11 +98,13 @@ spec:
         # add volumeMounts inside the container spec above
         # mount path: /var/lib/mysql
         ##
+        mount path: /var/lib/mysql
 
       ##
       # add volumes at the pod spec level (same indentation as containers)
       # reference the PVC: mysql-pv-claim
       ##
+      reference the PVC: mysql-pv-claim
 ---
 ##
 # create persistent volume claim here
@@ -82,4 +112,17 @@ spec:
 # storage: 1Gi
 # accessModes: ReadWriteOnce
 ##
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: standard
+  mount path: /var/lib/mysql
 
