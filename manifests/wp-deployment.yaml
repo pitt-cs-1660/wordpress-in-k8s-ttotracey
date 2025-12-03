@@ -109,11 +109,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: wp-pv-claim
 spec:
+  capacity:
+    storage: 1Gi
   accessModes:
   - ReadWriteOnce # Single pod read/write
-resources:
-  requests:
-    storage: 1Gi
   storageClassName: standard
   volumeMounts:
   - name: pvc-claim

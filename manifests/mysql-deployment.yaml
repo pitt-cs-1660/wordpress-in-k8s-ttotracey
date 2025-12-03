@@ -123,9 +123,8 @@ metadata:
 spec:
   accessModes: 
     - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+  capacity:
+    storage: 1Gi
   storageClassName: standard
   volumeMounts:
   - name: vol
