@@ -94,8 +94,8 @@ spec:
         # add volumeMounts inside the container spec above
         # mount path: /var/www/html
         ##
-        volumeMounts:
-        - name: config
+      volumeMounts:
+      - name: config
           mount path: /var/www/html
 
       ##
