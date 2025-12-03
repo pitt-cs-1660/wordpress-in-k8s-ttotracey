@@ -14,9 +14,9 @@ spec:
   # create service selector labels here
   # hint: match the deployment's labels (app: wordpress, tier: frontend)
   ##
-  labels:
-      app: wordpress
-      tier: frontend
+  selector:
+    app: wordpress
+    tier: frontend
 ---
 apiVersion: v1
 kind: ConfigMap
