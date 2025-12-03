@@ -96,8 +96,8 @@ spec:
         # mount path: /var/www/html
         ##
       volumeMounts:
-      - name: config
-          mount path: /var/www/html
+      - name: mount-wp
+        mount path: /var/www/html
 
       ##
       # add volumes at the pod spec level (same indentation as containers)
